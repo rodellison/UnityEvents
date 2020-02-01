@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using ScriptableObjects;
 
 public class MainScript : MonoBehaviour
 {

@@ -1,34 +1,37 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class GameEvent : ScriptableObject
+namespace ScriptableObjects
 {
-	private List<GameEventListener> listeners = new List<GameEventListener>();
+	[CreateAssetMenu]
+	public class GameEvent : ScriptableObject
+	{
+		private List<GameEventListener> listeners = new List<GameEventListener>();
 
-	public void Raise()
-	{
-		for (int i = listeners.Count - 1; i >= 0; i--)
+		public void Raise()
 		{
-			listeners[i].OnEventRaised();
+			for (int i = listeners.Count - 1; i >= 0; i--)
+			{
+				listeners[i].OnEventRaised();
+			}
 		}
-	}
 
-	public void RegisterListener(GameEventListener listener)
-	{
-		if (!listeners.Contains(listener))
+		public void RegisterListener(GameEventListener listener)
 		{
-			listeners.Add(listener);
+			if (!listeners.Contains(listener))
+			{
+				listeners.Add(listener);
+			}
+			else
+			{
+				Debug.LogWarning("Listener reregistered to event");
+			}
 		}
-		else
+
+		public void UnregisterListener(GameEventListener listener)
 		{
-			Debug.LogWarning("Listener reregistered to event");
+			listeners.Remove(listener);
 		}
+
 	}
-	
-	public void UnregisterListener(GameEventListener listener)
-	{
-		listeners.Remove(listener);
-	}
-	
 }

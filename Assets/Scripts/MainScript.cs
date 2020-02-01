@@ -18,7 +18,7 @@ public class MainScript : MonoBehaviour
 	{
 		while (true)
 		{
-			yield return new WaitForSeconds(4.0f);
+			yield return new WaitForSeconds(2.0f);
 			MyGameEvent.Raise();
 		}
 	}
